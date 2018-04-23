@@ -27,5 +27,3 @@ mongoose.connect(dbconf.url)
 app.listen(port,function(){
     console.log("Server running on http://"+hostname+":"+port)
 });
-
-//branch devthomas
