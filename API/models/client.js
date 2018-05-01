@@ -5,7 +5,7 @@ const routes = require('../server');
 //definition du schéma
 const Client = mongoose.Schema({
     nom: String,
-    prenom: String
+    prenom: String,
     email: String,
     numtel: Number,
     adresseFact: String,
