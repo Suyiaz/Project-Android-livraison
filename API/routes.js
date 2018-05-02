@@ -1,5 +1,6 @@
 const express = require('express');
 const Client = require('./models/Client');
+const Pizza = require('./models/pizza');
 const config = require('./config/db');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -10,6 +11,7 @@ module.exports = function(app){
 
     const apiRoutes = express.Router();
 
+    //Routes pour client
     apiRoutes.route('/').all(function(req,res){
         res.json({message:"Bienvenue sur l'API test",methode:req.method});
     });
@@ -89,6 +91,31 @@ module.exports = function(app){
                 }
             })
         }
+    })
+    //fin routes client
+
+    //Routes pizzas
+    apiRoutes.get('/pizzas',function(req,res){
+        Pizza.find({}).then((response)=>{
+            return res.json({response});
+        })
+    });
+
+    apiRoutes.post('/pizzas',urlencodedParser,function(req,res){
+        const pizza = new Pizza({
+            description: req.body.description,
+            prix: req.body.prix,
+            taille: req.body.taille,
+            imageURL: req.body.imageURL
+        });
+            pizza.save(function(err,response){
+                if (err){
+                    res.send(err)
+                    console.log(err)
+                }
+                res.json({response});
+                console.log('Pizza stocké' + response)
+            })
     })
 
    app.use(apiRoutes);
