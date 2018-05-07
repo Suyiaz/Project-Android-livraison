@@ -1,6 +1,6 @@
 const express = require('express');
 const Client = require('./models/Client');
-const Pizza = require('./models/pizza');
+const Article = require('./models/article');
 const config = require('./config/db');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -94,28 +94,33 @@ module.exports = function(app){
     })
     //fin routes client
 
-    //Routes pizzas
-    apiRoutes.get('/pizzas',function(req,res){
-        Pizza.find({}).then((response)=>{
+    
+    //Routes articles
+    apiRoutes.get('/articles',function(req,res){
+        Article.find({}).then((response)=>{
             return res.json({response});
         })
     });
 
-    apiRoutes.post('/pizzas',urlencodedParser,function(req,res){
-        const pizza = new Pizza({
+    apiRoutes.post('/articles',urlencodedParser,function(req,res){
+        const article = new Article({
+            libelle: req.body.libelle,
             description: req.body.description,
             prix: req.body.prix,
-            taille: req.body.taille,
-            imageURL: req.body.imageURL
+            type: req.body.type
         });
-            pizza.save(function(err,response){
-                if (err){
-                    res.send(err)
-                    console.log(err)
-                }
-                res.json({response});
-                console.log('Pizza stocké' + response)
-            })
+
+        article.save(function(err,response){
+            if (err) {
+                res.send(err)
+                console.log(err)
+            }
+            res.json({response});
+            console.log('Article stocké ' + response);
+        })
+
+    //fin routes Articles
+
     })
 
    app.use(apiRoutes);
