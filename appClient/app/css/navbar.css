@@ -1,0 +1,59 @@
+/**
+ * E-COMMAND - Feuille de style
+ * Style de la barre de navigation
+ */
+header {
+	display: flex;
+	justify-content: center;
+	height: 70px;
+	background-color: #224E76;
+}
+
+/* Barre de navigation */
+header > nav#navbar {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Logo */
+header > nav#navbar > div#ec_logo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+	header > nav#navbar > div#ec_logo > span.titre {
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 18px;
+		color: #FFFFFF;
+	}
+	header > nav#navbar > div#ec_logo > span.slogan {
+		color: #CCCCCC;
+	}
+
+/* Menu */
+header > nav#navbar > ul {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+	header > nav#navbar > ul > li {
+		display: flex;
+		height: 100%;
+		list-style: none;
+	}
+	header > nav#navbar > ul > li > a {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		padding: 0 15px;
+		align-items: center;
+		text-decoration: none;
+		color: #FFFFFF;
+	}
+
+@media screen and (min-width: 1050px) {
+	header > nav#navbar {
+		width: 1000px;
+	}
+}
