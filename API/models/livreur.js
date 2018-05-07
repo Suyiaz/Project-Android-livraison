@@ -6,8 +6,8 @@ const Livreur = mongoose.Schema({
     nom: String,
     prenom: String,
     statut: String,
-    statut: Number,
-    email: String
+    email: String,
+    motDePasse: String
 });
 
 module.exports = mongoose.model('Livreur',Livreur);
