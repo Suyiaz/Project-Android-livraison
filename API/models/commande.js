@@ -5,6 +5,8 @@ const routes = require('../server');
 const Commande = mongoose.Schema({
     date: Date,
     description: String,
+    prixTotal: Number,
+    etatAvancement: String,
     estPaye: Boolean
 });
 
