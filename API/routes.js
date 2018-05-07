@@ -1,6 +1,7 @@
 const express = require('express');
 const Client = require('./models/Client');
 const Article = require('./models/article');
+const TypeArticle = require('./models/typeArticle');
 const config = require('./config/db');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -120,6 +121,28 @@ module.exports = function(app){
         })
 
     //fin routes Articles
+})
+
+    //routes typeArticles
+    apiRoutes.get('/typeArticles',urlencodedParser,function(req,res){
+        TypeArticle.find({}).then((response)=>{
+            return res.json({response});
+        })
+    })
+
+    apiRoutes.post('/typeArticles',urlencodedParser,function(req,res){
+        const typeArticle = new TypeArticle({
+            idType: req.body.idType,
+            nom: req.body.nom
+        });
+        typeArticle.save(function(err,response){
+            if (err){
+                res.send(err);
+                console.log(err)
+            }
+            res.json({response});
+            console.log('Type Article stocké ' + response);
+        })
 
     })
 

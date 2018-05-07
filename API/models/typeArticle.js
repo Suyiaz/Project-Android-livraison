@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const routes = require('../server');
 
 const TypeArticle = mongoose.Schema({
+    idType: Number,
     nom: String
 });
 
