@@ -21,7 +21,13 @@ module.exports = function(app){
             console.log(req.body);
             const client = new Client({
             nom: req.body.nom,
-            prenom: req.body.prenom
+            prenom: req.body.prenom,
+            email: req.body.email,
+            numtel: req.body.numtel,
+            adresseFact: req.body.adresseFact,
+            codePostal: req.body.codePostal,
+            ville: req.body.ville,
+            mdp: req.body.mdp
         });
             client.save(function(err,response){
                 if (err){
