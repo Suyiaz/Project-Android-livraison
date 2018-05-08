@@ -11,7 +11,7 @@ module.exports = function(app){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'Test'
+        database: 'pizzatologue'
     });
 
     //connect to mysql
@@ -34,12 +34,12 @@ module.exports = function(app){
         var pNom = req.body.nom;
         var pPrenom = req.body.prenom;
         console.log(req.body);
-        connection.query('INSERT INTO client SET nom = ?, prenom = ?',[pNom,pPrenom], function (error, results, fields) {
+        /*connection.query('INSERT INTO client SET nom = ?, prenom = ?',[pNom,pPrenom], function (error, results, fields) {
             if (error) {
                 throw error;
             }
             return res.status(200).json({success:true,message:'Client ajouté'});
-        });
+        });*/
     });
 
     apiRoutes.get('/client',function(req,res){
@@ -63,96 +63,36 @@ module.exports = function(app){
         }); 
     });
 
-    var nomclient = "";
 
-    apiRoutes.delete('/client/',urlencodedParser,function(req,res){
-        /*if(!req.body.id){
-            return res.status(400).json({success:false,message:'Donne moi le client id'});
-        }
-            return Client.findOne({'_id':req.body.id}).then((response) => {
-                nomclient = response.nom;
-                console.log(nomclient);
-                 Client.deleteOne({'_id':req.body.id}).then((response) => {
-                    if(!response){
-                        return res.status(400).json({success:false,message:'Erreur, objet non trouvé en bd'})
-                    } else {
-                        return res.status(200).json({success:true,message:'Client ' + nomclient + ' supprimé'});
-                    }
-                })
-       })        */
-    })
+    apiRoutes.delete('/client/',urlencodedParser,function(req,res){})
 
-    apiRoutes.put('/client',urlencodedParser,function(req,res){
-        /*if(!req.body.id){
-            return res.status(400).json({success:false,message:'Merci de passer l\id a modifié dans le body'});
-        } else {
-            Client.findOne({'_id':req.body.id}).then((response) => {
-                if(!response){
-                    return res.status(400).json({success:false,message:'L\id demandé n existe pas en base'});
-                } else {
-                    response.nom = req.body.nom
-                    response.prenom = req.body.prenom,
-                    response.save(function(err,result){
-                        if (err) {
-                            res.status(400).send(err);
-                          }
-                          res.status(200).json({success: true, result});
-                    })
-                }
-            })
-        }*/
-    })
+
+
+    apiRoutes.put('/client',urlencodedParser,function(req,res){})
     //fin routes client
 
+    //début du traitement pour le renvoi des données pour le livreur
+    apiRoutes.get('/tournee/:livreurid',function(req,res){
+        if(!req.params.livreurid){
+            return res.status(400).json({success:false,message:'Client id necessaire'});
+        }
+        connection.query('select c.*, al.adresse, al.codePostal, al.ville from livreur l join tournee t on t.idLivreur = l.idLivreur join commande c on c.idTournee = t.idTournee join adresselivraison al on al.idAdresseLivraison = c.idAdresseLivraison where l.idLivreur = ?',[req.params.livreurid], function (error, results, fields) {
+            if (error) {
+                throw error;
+            }
+            return res.json(results);
+        }); 
+    });
     
     //Routes articles
-    apiRoutes.get('/articles',function(req,res){
-        /*Article.find({}).then((response)=>{
-            return res.json({response});
-        })*/
-    });
+    apiRoutes.get('/articles',function(req,res){});
 
-    apiRoutes.post('/articles',urlencodedParser,function(req,res){
-        /*const article = new Article({
-            libelle: req.body.libelle,
-            description: req.body.description,
-            prix: req.body.prix,
-            type: req.body.type
-        });
-
-        article.save(function(err,response){
-            if (err) {
-                res.send(err)
-                console.log(err)
-            }
-            res.json({response});
-            console.log('Article stocké ' + response);
-        })*/
-
-    //fin routes Articles
-    })
+    apiRoutes.post('/articles',urlencodedParser,function(req,res){})
 
     //routes typeArticles
-    apiRoutes.get('/typeArticles',urlencodedParser,function(req,res){
-       /* TypeArticle.find({}).then((response)=>{
-            return res.json({response});
-        })*/
-    })
+    apiRoutes.get('/typeArticles',urlencodedParser,function(req,res){})
 
-    apiRoutes.post('/typeArticles',urlencodedParser,function(req,res){
-       /* const typeArticle = new TypeArticle({
-            idType: req.body.idType,
-            nom: req.body.nom
-        });
-        typeArticle.save(function(err,response){
-            if (err){
-                res.send(err);
-                console.log(err)
-            }
-            res.json({response});
-            console.log('Type Article stocké ' + response);
-        })*/
-    })
+    apiRoutes.post('/typeArticles',urlencodedParser,function(req,res){})
 
    app.use(apiRoutes);
 }
