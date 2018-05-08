@@ -35,7 +35,7 @@ module.exports = function(app){
 
     apiRoutes.get('/client',function(req,res){
             Client.find({}).then((response)=>{
-                return res.json({response});
+                return res.json(response);
             })
         });
 
@@ -47,7 +47,7 @@ module.exports = function(app){
             if(!response){
                 return res.status(400).json({success:false,message:'Erreur, objet non trouvé en bd'});
             } else {
-                return res.status(200).json({response});
+                return res.status(200).json(response);
             }
         })
     });
@@ -143,7 +143,6 @@ module.exports = function(app){
             res.json({response});
             console.log('Type Article stocké ' + response);
         })
-
     })
 
    app.use(apiRoutes);
