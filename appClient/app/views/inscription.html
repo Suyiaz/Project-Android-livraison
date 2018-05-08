@@ -8,10 +8,10 @@
                     <div class="subpart subpart_identity">
                         <h2>Identité</h2>
                         <div class="form_group">
-                            <input class="ec_input ec_input_lastname" type="text" ng-model="lastname" placeholder="Nom" />
-                            <input class="ec_input ec_input_firstname" type="text" ng-model="firstname" placeholder="Prénom" />
-                            <input class="ec_input ec_input_email" type="text" ng-model="email" placeholder="E-mail" />
-                            <input class="ec_input ec_input_phoneNumber" type="text" ng-model="phoneNumber" placeholder="Numéro de téléphone" />
+                            <input class="ec_input ec_input_lastname" type="text" ng-model="inscriptionCtrl.lastName" placeholder="Nom" />
+                            <input class="ec_input ec_input_firstname" type="text" ng-model="inscriptionCtrl.firstName" placeholder="Prénom" />
+                            <input class="ec_input ec_input_email" type="text" ng-model="inscriptionCtrl.email" placeholder="E-mail" />
+                            <input class="ec_input ec_input_phoneNumber" type="text" ng-model="inscriptionCtrl.phoneNumber" placeholder="Numéro de téléphone" />
                         </div>
                     </div>
 
@@ -19,13 +19,13 @@
                     <div class="subpart subpart_facturation_address">
                         <h2>Adresse de facturation</h2>
                         <div class="form_group">
-                            <input class="ec_input ec_input_addressLabel" type="text" ng-model="addressLabel" placeholder="Numéro et Rue" />
-                            <input class="ec_input ec_input_zip" type="text" ng-model="zip" placeholder="Code Postal" />
-                            <input class="ec_input ec_input_city" type="text" ng-model="city" placeholder="Ville" />
+                            <input class="ec_input ec_input_addressLabel" type="text" ng-model="inscriptionCtrl.addressLabel" placeholder="Numéro et Rue" />
+                            <input class="ec_input ec_input_zip" type="text" ng-model="inscriptionCtrl.codePostal" placeholder="Code Postal" />
+                            <input class="ec_input ec_input_city" type="text" ng-model="inscriptionCtrl.city" placeholder="Ville" />
                         </div>
                     </div>
 
-                    <!-- Adresses de livraison -->
+                    <!-- Adresses de livraison 
                     <div class="subpart subpart_shipping_addresses">
                         <h2>Adresses de livraison</h2>
                         <div class="subpart_2 subpart_shipping_address_1">
@@ -37,18 +37,16 @@
                                 <input class="ec_input ec_input_city" type="text" ng-model="city" placeholder="Ville" />
                             </div>
                         </div>
-
-                        <!-- Ajouter une adresse de livraison -->
                         <button type="button" class="btn btn-info">Ajouter une adresse de livraison</button>
 
                     </div>
-
+-->
                     <!-- Commandes décisives -->
                     <div class="cmd">
                         <button type="button" class="btn btn-dark">J'ai déjà un compte</button>
 
 
-                        <button type="button" class="btn btn-primary">Valider inscription</button>
+                        <button type="button" class="btn btn-primary" ng-click="inscriptionCtrl.printData()">Valider inscription</button>
                     </div>
                 </div>
             </div>
