@@ -1,4 +1,4 @@
-package com.example.johan.myapplication;
+package com.example.johan.myapplication.controlers;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.johan.myapplication.R;
+import com.example.johan.myapplication.models.Client;
+import com.example.johan.myapplication.models.Commande;
 
 public class DetailCommandeActivity extends AppCompatActivity {
     private Commande cmd;
@@ -27,8 +31,8 @@ public class DetailCommandeActivity extends AppCompatActivity {
         tx.setText("#"+bundle.getInt("idCmd"));
 
         //rechercher le détails de la commande depuis l'id de la commande dans la BDD
-        cmd = new Commande(20.5F,5,365478,"5 rue Arthur Rimbaud 31200 Toulouse");
-        c = new Client("Marley","Bob","","0564785856");
+//        cmd = new Commande(20.5F,5,"5 rue Arthur Rimbaud",31200,"Toulouse");
+//        c = new Client("Marley","Bob","","0564785856");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,7 +43,7 @@ public class DetailCommandeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + c.getTelephone()));
+                Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + c.getNumTel()));
                 startActivity(phoneIntent);
             }
         });

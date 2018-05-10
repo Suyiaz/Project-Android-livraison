@@ -1,13 +1,11 @@
-package com.example.johan.myapplication;
+package com.example.johan.myapplication.controlers;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,17 +16,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.johan.myapplication.R;
+import com.example.johan.myapplication.models.Commande;
+import com.example.johan.myapplication.models.Livreur;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-    ListView mListView;
-    private List<Commande> listCommande = new ArrayList<Commande>();
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,29 +53,71 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //ajouter des commandes à une liste
-        listCommande.add(new Commande(35.25F,1,36545,"3 rue des pins"));
-        listCommande.add(new Commande(30.25F,2,36589,"6 Rue du thor"));
-        listCommande.add(new Commande(20.00F,3,37589,"6 Avenue de la Halle"));
-        listCommande.add(new Commande(15.00F,4,38697,"154 Rue Voltaire"));
+        APIRestService api = initAPIService();
+        chargerDonnees(api);
 
-        //ajouter des items dans la list view
-        mListView = (ListView) findViewById(R.id.listviewCommandes);
+    }
 
-        CommandeAdapter adapter = new CommandeAdapter(MainActivity.this, listCommande);
-        mListView.setAdapter(adapter);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+    public void chargerDonnees(APIRestService api){
+        remplirListeCommande(api);
+        //Livreur l = getInfosLivreur(api);
+    }
+
+
+    public void remplirListeCommande(APIRestService api){
+        final ListView mListview = (ListView)findViewById(R.id.listviewCommandes);
+        Call<List<Commande>> call = api.listeCommandes(1);
+        call.enqueue(new Callback<List<Commande>>() {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                Commande item = (Commande) adapter.getItemAtPosition(position);
+            public void onResponse(Call<List<Commande>> call, Response<List<Commande>> response) {
+                List<Commande> commandes = response.body();
+                mListview.setAdapter(new CommandeAdapter(MainActivity.this, commandes));
+                mListview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                        Commande item = (Commande) adapter.getItemAtPosition(position);
 
-                Intent intent = new Intent(MainActivity.this,DetailCommandeActivity.class);
-                intent.putExtra("idCmd",item.getId());
-                //based on item add info to intent
-                startActivity(intent);
+                        Intent intent = new Intent(MainActivity.this,DetailCommandeActivity.class);
+                        intent.putExtra("idCmd",item.getIdCommande());
+                        //based on item add info to intent
+                        startActivity(intent);
+                    }
+                });
+            }
+            @Override
+            public void onFailure(Call<List<Commande>> call, Throwable t) {
+                Log.d("message1", t.toString());
+                Log.d("message2", "onResponse: " + call.request().toString());
+                Toast.makeText(MainActivity.this, "Aucune connexion avec le server, veillez recommencer",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public Livreur getInfosLivreur(APIRestService api){
+        final Livreur[] result = new Livreur[0];
+        Call<Livreur> call = api.infoLivreur("1");
+        call.enqueue(new Callback<Livreur>(){
+            @Override
+            public void onResponse(Call<Livreur> call, Response<Livreur> response) {
+                result[0] = response.body();
+            }
+            @Override
+            public void onFailure(Call<Livreur> call, Throwable t) {
+                Log.d("Message2", t.toString());
+                Log.d("Message2", "onResponse: " + call.request().toString());
+                Toast.makeText(MainActivity.this, "error :(",Toast.LENGTH_SHORT).show();
+            }
+        });
+        return result[0];
+    }
+
+    public APIRestService initAPIService(){
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.53:3000/")
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        return retrofit.create(APIRestService.class);
     }
 
     @Override

@@ -85,6 +85,18 @@ module.exports = function(app){
             return res.json(results);
         }); 
     });
+
+    apiRoutes.get('/livreur/:livreurid',function(req,res){
+        if(!req.params.livreurid){
+            return res.status(400).json({success:false,message:'Client id necessaire'});
+        }
+        connection.query('select l.nom, l.prenom,l.email from livreur l where l.idLivreur = ?',[req.params.livreurid], function (error, results, fields) {
+            if (error) {
+                throw error;
+            }
+            return res.json(results);
+        }); 
+    });
     
     //Routes articles
     apiRoutes.get('/articles',function(req,res){});
