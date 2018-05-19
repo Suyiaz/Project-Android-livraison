@@ -5,42 +5,52 @@
                 <div class="panel-heading"><h1>Inscription</h1></div>
                 <div class="panel-body">
                     <!-- Identité -->
-                    <div class="subpart subpart_identity">
-                        <h2>Identité</h2>
-                        <div class="form_group">
-                            <input class="ec_input ec_input_lastname" type="text" ng-model="inscriptionCtrl.lastName" placeholder="Nom" />
-                            <input class="ec_input ec_input_firstname" type="text" ng-model="inscriptionCtrl.firstName" placeholder="Prénom" />
-                            <input class="ec_input ec_input_email" type="text" ng-model="inscriptionCtrl.email" placeholder="E-mail" />
-                            <input class="ec_input ec_input_phoneNumber" type="text" ng-model="inscriptionCtrl.phoneNumber" placeholder="Numéro de téléphone" />
+                    <div class="ec_form form_identity">
+                        <div class="li_grp">
+                            <label for="ec_form_lastname">Nom</label>
+                            <input type="text" ng-model="ec_form_lastname" placeholder="Selema" />
+                        </div>
+                        <div class="li_grp">
+                            <label for="ec_form_firstname">Prénom</label>
+                            <input type="text" ng-model="ec_form_firstname" placeholder="Jean-Rachid" />
+                        </div>
+                        <div class="li_grp">
+                            <label for="ec_form_email">Email</label>
+                            <input type="email" ng-model="ec_form_email" placeholder="selema.jr@gmail.com" />
+                        </div>
+                        <div class="li_grp">
+                            <label for="ec_form_phonenumber">N° Tél.</label>
+                            <input type="text" maxlength="10" ng-model="ec_form_phonenumber" placeholder="0781452389" />
+                        </div>
+                        <div class="li_grp">
+                            <label for="ec_form_password">Mot de passe</label>
+                            <input type="password" ng-model="ec_form_password" placeholder="•••••••" />
+                        </div>
+                        <div class="li_grp">
+                            <label for="ec_form_password_confirm">Confirmer</label>
+                            <input type="password" ng-model="ec_form_password_confirm" placeholder="•••••••" />
                         </div>
                     </div>
 
-                    <!-- Adresse de facturation -->
-                    <div class="subpart subpart_facturation_address">
+                    <div class="ec_container">
                         <h2>Adresse de facturation</h2>
-                        <div class="form_group">
-                            <input class="ec_input ec_input_addressLabel" type="text" ng-model="inscriptionCtrl.addressLabel" placeholder="Numéro et Rue" />
-                            <input class="ec_input ec_input_zip" type="text" ng-model="inscriptionCtrl.codePostal" placeholder="Code Postal" />
-                            <input class="ec_input ec_input_city" type="text" ng-model="inscriptionCtrl.city" placeholder="Ville" />
-                        </div>
-                    </div>
-
-                    <!-- Adresses de livraison 
-                    <div class="subpart subpart_shipping_addresses">
-                        <h2>Adresses de livraison</h2>
-                        <div class="subpart_2 subpart_shipping_address_1">
-                            <h3>Adresse n°1</h3>
-                            <div class="form_group">
-                                <input class="ec_input ec_input_placeLabel" type="text" ng-model="placeLabel" placeholder="Nom du lieu (Exemples: Domicile, Travail)" />
-                                <input class="ec_input ec_input_addressLabel" type="text" ng-model="addressLabel" placeholder="Numéro et Rue" />
-                                <input class="ec_input ec_input_zip" type="text" ng-model="zip" placeholder="Code Postal" />
-                                <input class="ec_input ec_input_city" type="text" ng-model="city" placeholder="Ville" />
+                        <div class="ec_subcontainer">
+                            <div class="ec_form form_address form_invoicing_address">
+                                <div class="li_grp li_grp_address">
+                                    <label for="ec_form_address">Adresse</label>
+                                    <input type="text" ng-model="ec_form_address" placeholder="123, rue des Maux" />
+                                </div>
+                                <div class="li_grp li_grp_zip">
+                                    <label for="ec_form_zip">Code postal</label>
+                                    <input type="text" maxlength="5" ng-model="ec_form_zip" placeholder="01400" />
+                                </div>
+                                <div class="li_grp li_grp_city">
+                                    <label for="ec_form_city">Ville</label>
+                                    <input type="text" ng-model="ec_form_city" placeholder="" />
+                                </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-info">Ajouter une adresse de livraison</button>
-
                     </div>
--->
                     <!-- Commandes décisives -->
                     <div class="cmd">
                         <button type="button" class="btn btn-dark">J'ai déjà un compte</button>
@@ -52,5 +62,4 @@
             </div>
         </div>
     </div>
-
 </div>
