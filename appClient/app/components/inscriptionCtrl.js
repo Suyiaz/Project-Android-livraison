@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//https://coderwall.com/p/3vi8bg/communication-between-controllers-in-angularjs
 app.component('inscription', {
     controllerAs: 'inscriptionCtrl',
     templateUrl: "views/inscription.html",

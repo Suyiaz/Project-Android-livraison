@@ -9,6 +9,24 @@ and open the template in the editor.
 */
 
 
+.title {
+    box-sizing:border-box;
+    display: inline-block;
+
+    text-align:left;
+    font:normal 12px sans-serif;
+
+    background-color:#ffffff;
+    border:1px solid #dbe3e7;
+    border-radius: 3px;
+    box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.08);
+    margin: 0 12px 14px 0;
+
+    padding: 25px;
+
+
+}
+
 
 .product-list-basic{
     list-style:none;
@@ -104,16 +122,4 @@ and open the template in the editor.
     margin: 0;
 }
 
-/* Making the list responsive */
-
-@media (max-width: 800px){
-
-    .product-list-basic .product-photo{
-        width: 225px;
-    }
-
-    .product-list-basic .product-description{
-        max-width: 225px;
-    }
-}
 
