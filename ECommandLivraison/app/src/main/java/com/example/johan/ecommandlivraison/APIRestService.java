@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 public interface APIRestService {
 
-    public static final String ENDPOINT = "http://192.168.1.28:3000/";
+    public static final String ENDPOINT = "http://192.168.1.53:3000/";
 
     @GET("client/commande/{idCommande}")
     Call<List<Client>> infoClient(@Path("idCommande") String idCommande);

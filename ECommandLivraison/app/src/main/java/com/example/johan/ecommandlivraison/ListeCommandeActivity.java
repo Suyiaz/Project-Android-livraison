@@ -149,10 +149,10 @@ public class ListeCommandeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_finish) {
-            confirmerMessage("Confirmation", "Etes-vous sûr de vouloir valider les commandes ?");
-            return true;
-        }
+//        if (id == R.id.action_finish) {
+//            confirmerMessage("Confirmation", "Etes-vous sûr de vouloir valider les commandes ?");
+//            return true;
+//        }
         if (id == R.id.action_reload) {
             chargerDonnees(instanceApi);
             Toast.makeText(ListeCommandeActivity.this,"Actualisation...", Toast.LENGTH_SHORT).show();

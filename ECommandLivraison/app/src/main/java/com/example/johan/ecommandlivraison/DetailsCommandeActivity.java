@@ -79,28 +79,32 @@ public class DetailsCommandeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
                 List<Client> clients = response.body();
-                cli = clients.get(0);
+                if (clients.get(0)!=null) {
+                    cli = clients.get(0);
+                    //nom+prenom cli dans tab commande
+                    TextView nomCli = (TextView) findViewById(R.id.valNomCli);
+                    nomCli.setText(cli.getNom() + " " + cli.getPrenom());
 
-                //nom+prenom cli dans tab commande
-                TextView nomCli = (TextView)findViewById(R.id.valNomCli);
-                nomCli.setText(cli.getNom()+" "+cli.getPrenom());
+                    //email cli dans tab commande
+                    TextView emaCli = (TextView) findViewById(R.id.valEmaCli);
+                    emaCli.setText(cli.getEmail());
 
-                //email cli dans tab commande
-                TextView emaCli = (TextView)findViewById(R.id.valEmaCli);
-                emaCli.setText(cli.getEmail());
+                    //tel liv dans nav
+                    TextView telCli = (TextView) findViewById(R.id.valTelCli);
+                    telCli.setText(cli.getNumTel());
+                    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabPhone);
 
-                //tel liv dans nav
-                TextView telCli = (TextView)findViewById(R.id.valTelCli);
-                telCli.setText(cli.getNumTel());
-                FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fabPhone);
-
-                fab.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + cli.getNumTel()));
-                        startActivity(phoneIntent);
-                    }
-                });
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + cli.getNumTel()));
+                            startActivity(phoneIntent);
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(DetailsCommandeActivity.this, "Error: Aucun client", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onFailure(Call<List<Client>> call, Throwable t) {
@@ -116,11 +120,18 @@ public class DetailsCommandeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
                 List<Article> articles = response.body();
-                cmd.setArticles(articles);
-                ListView listeArticles = (ListView) findViewById(R.id.listeArticles);
-                listeArticles.setAdapter(new ArticleAdapter(DetailsCommandeActivity.this, articles));
-                Log.d("SOMMEEEEEE", cmd.sommePrix()+"");
-                Log.d("LISTE 1", ""+articles.get(0).getLibelle());
+                if(articles.size()!=0) {
+                    cmd.setArticles(articles);
+                    ListView listeArticles = (ListView) findViewById(R.id.listeArticles);
+                    listeArticles.setAdapter(new ArticleAdapter(DetailsCommandeActivity.this, articles));
+
+                    TextView somme = (TextView) findViewById(R.id.sommeArticle);
+                    somme.setText(cmd.sommePrix() + "€");
+                    Log.d("SOMMEEEEEE", cmd.sommePrix() + "");
+                }
+                else {
+                    Toast.makeText(DetailsCommandeActivity.this, "Error: Aucun article", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onFailure(Call<List<Article>> call, Throwable t) {
