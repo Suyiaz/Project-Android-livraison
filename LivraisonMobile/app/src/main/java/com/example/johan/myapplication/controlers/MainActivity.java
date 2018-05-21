@@ -23,7 +23,6 @@ import com.example.johan.myapplication.R;
 import com.example.johan.myapplication.models.Commande;
 import com.example.johan.myapplication.models.Livreur;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

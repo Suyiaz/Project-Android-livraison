@@ -1,4 +1,4 @@
-README
+﻿README
 
 Méthode 1:
 1) Copier le dossier "pizzatologue" dans le fichier data de mysql à l'adresse :
@@ -32,10 +32,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `adresseFacturation`
+-- Structure de la table `AdresseFacturation`
 --
 
-CREATE TABLE `adresseFacturation` (
+CREATE TABLE `AdresseFacturation` (
   `idAdresseFacturation` int(11) NOT NULL,
   `adresse` text NOT NULL,
   `codePostal` int(5) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `adresseFacturation` (
 -- Déchargement des données de la table `adresseFacturation`
 --
 
-INSERT INTO `adresseFacturation` (`idAdresseFacturation`, `adresse`, `codePostal`, `ville`) VALUES
+INSERT INTO `AdresseFacturation` (`idAdresseFacturation`, `adresse`, `codePostal`, `ville`) VALUES
 (1, '6 rue de la libération', 31500, 'Toulouse'),
 (2, '3 Avenue de la république', 31100, 'Toulouse');
 
@@ -115,6 +115,7 @@ CREATE TABLE `Commande` (
   `prixTotalHT` int(31) NOT NULL,
   `prixTotalTTC` int(31) NOT NULL,
   `prixTotalTVA` float NOT NULL,
+  `ordre` int(3),
   `etatAvancement` int(1) NOT NULL,
   `idClient` int(11) NOT NULL,
   `idAdresseLivraison` int(11) NOT NULL,
