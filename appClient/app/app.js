@@ -1,33 +1,59 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-var app = angular.module('myApp', ['ngRoute', 'angularCSS']);
+angular
+    .module('myApp', [
+        'ngRoute',
+        'ecNavbar',
+        'ecFooter',
+        'angularCSS',
+        'APIMock',
+        'article',
+        'panier',
+        'livraison',
+        'confirmationCommande'
+    ])
+    .constant('config', {
+        dataPath: 'http://localhost:3000/'
+    })
+    .config(['$locationProvider', '$routeProvider', '$qProvider',
+        function config($locationProvider, $routeProvider, $qProvider) {
+                $qProvider.errorOnUnhandledRejections(false);
+                $locationProvider.hashPrefix('!');
 
-app.constant('config', {
-    templatePath: 'http://localhost:3000/'
-});
-
-app.config(function ($routeProvider) {
-    $routeProvider
-            .when("/", {
-               templateUrl: "views/article.html",
-                css: "css/article.css"
-            })
-            .when("/inscription", {
-                template: '<inscription></inscription>',
-                css: "css/inscription.css",
-            })
-            .when("/login", {
-                templateUrl: "views/login.html",
-                css: "css/login.css"
-            })
-            .when("/article", {
-                templateUrl: "views/article.html",
-                css: "css/article.css"
-            })
-            .when("/panier", {
-                templateUrl: "views/panier.html",
-                css: "css/panier.css"
-            });
-
-});
+                $routeProvider
+                .when("/", {
+                        templateUrl: "accueil/accueil.template.html",
+                        css: "accueil/accueil.style.css"
+                })
+                .when("/accueil", {
+                        templateUrl: "accueil/accueil.template.html",
+                        css: "accueil/accueil.style.css"
+                })
+                .when("/articles", {
+                        controller: 'ArticleListCtrl',
+                        templateUrl: "article/article.template.html",
+                        css: "article/article.style.css"
+                })
+                /*.when("/article/:articleid", {
+                        controller: 'ArticleDetailsCtrl',
+                        templateUrl: "article/article.template.html",
+                        css: "article/article.style.css"
+                })*/
+                .when("/panier", {
+                        controller: 'PanierCtrl',
+                        templateUrl: "panier/panier.template.html",
+                        css: "panier/panier.style.css"
+                })
+                .when("/livraison", {
+                        controller: 'LivraisonCtrl',
+                        templateUrl: "livraison/livraison.template.html",
+                        css: "livraison/livraison.style.css"
+                })
+                .when("/confirmation", {
+                        controller: 'ConfirmationCommandeCtrl',
+                        templateUrl: "confirmation-commande/confirmation-commande.template.html",
+                        css: "confirmation-commande/confirmation-commande.style.css"
+                });
+        }
+    ]);

@@ -1,0 +1,87 @@
+<!-- Fil d'ariane -->
+<div class="ec_container ec_container_breadcrumb">
+    <ol class="ec_subcontainer" id="breadcrumb">
+        <li class="active"><a href="#!/panier">Panier</a></li>
+        <li><a href="#!/livraison">Livraison</a></li>
+        <li><a href="#!/confirmation">Confirmation</a></li>
+    </ol>
+</div>
+
+<!-- Introduction panier de commande -->
+<div class="ec_container ec_title">
+    <h1>Mon panier</h1>
+</div>
+
+<!-- Panier de commande -->
+<div class="ec_container ec_container_basket" ng-controller="PanierCtrl">
+    <div class="ec_subcontainer">
+        <table id="basket">
+            <thead ng-show="panier.length > 0">
+                <tr>
+                    <th class="ec_th_feature"></th>
+                    <th class="ec_th_product">Produit</th>
+                    <th class="ec_th_quantity">Quantité</th>
+                    <th class="ec_th_unit_price">Prix unitaire</th>
+                    <th class="ec_th_total_line_price">Prix total</th>
+                </tr>
+            </thead>
+            <tbody ng-show="panier.length === 0">
+                <tr>
+                    <td></td>
+                    <td colspan="4">
+                        <span class="prompt prompt_empty_title">Panier vide !</span>
+                        <span class="prompt prompt_empty_description">Vous pouvez sélectionner vos produits dans le <a href="#!/articles">catalogue</a>.</span>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="panier.length > 0">
+                <tr ng-repeat="lignePanier in panier">
+                    <td class="ec_td_feature">
+                        <button class="cmd_retire_product"><i class="fa fa-trash-alt"></i></button>
+                    </td>
+                    <td class="ec_td_product">
+                        <span class="product_name">{{lignePanier.libelle}}</span>
+                        <span class="product_description">{{lignePanier.description}}</span>
+                    </td>
+                    <td class="ec_td_quantity">
+                        <button class="cmd cmd_retire_unit" ng-click="downQuantity(lignePanier)"><i class="fa fa-minus"></i></button>
+                        <span class="viewer_quantity">{{lignePanier.quantite}}</span>
+                        <button class="cmd cmd_add_unit" ng-click="upQuantity(lignePanier)"><i class="fa fa-plus"></i></button>
+                    </td>
+                    <td class="ec_td_unit_price">
+                        <span class="price_value">{{lignePanier.prixHTFloat}}</span>
+                        <span class="currency">€</span>
+                    </td>
+                    <td class="ec_td_total_line_price">
+                        <span class="price_value">{{lignePanier.prixTotalLigneFloat}}</span>
+                        <span class="currency">€</span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot ng-show="panier.length > 0">
+                <tr>
+                    <td class="ec_tf_empty"></td>
+                    <td class="ec_tf_empty"></td>
+                    <td class="ec_tf_empty"></td>
+                    <td class="ec_tf_label">Prix total HT</td>
+                    <td class="ec_tf_total_price">
+                        <span class="total_price">
+                            <span class="price_value">{{prixTotalHTFloat}}</span>
+                            <span class="currency">€</span>
+                        </span>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="ec_container">
+    <div class="ec_subcontainer cmd_final">
+        <span>&nbsp;</span>
+        <a class="btn_a continue" href="#!/livraison">
+            <span>Choisir mon mode de livraison</span>
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </div>
+</div>
