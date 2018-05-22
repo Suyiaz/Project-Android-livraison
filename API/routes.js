@@ -12,7 +12,7 @@ module.exports = function(app){
         port: '8889',
         user: 'root',
         password: 'root',
-        database: 'PizzatologueV1'
+        database: 'PizzatologueV2'
     });
 
     //connect to mysql
@@ -77,7 +77,7 @@ module.exports = function(app){
     //début du traitement pour le renvoi des données pour le livreur
     apiRoutes.get('/tournee/:livreurid',function(req,res){
         if(!req.params.livreurid){
-            return res.status(400).json({success:false,message:'Client id necessaire'});
+            return res.status(400).json({success:false,message:'Livreur id necessaire'});
         }
         connection.query('select c.*, al.adresse, al.codePostal, al.ville from livreur l join tournee t on t.idLivreur = l.idLivreur join commande c on c.idTournee = t.idTournee join adresselivraison al on al.idAdresseLivraison = c.idAdresseLivraison where l.idLivreur = ? order by c.ordre',[req.params.livreurid], function (error, results, fields) {
             if (error) {
@@ -89,7 +89,7 @@ module.exports = function(app){
 
     apiRoutes.get('/livreur/:livreurid',function(req,res){
         if(!req.params.livreurid){
-            return res.status(400).json({success:false,message:'Client id necessaire'});
+            return res.status(400).json({success:false,message:'Livreur id necessaire'});
         }
         connection.query('select l.idLivreur, l.nom, l.prenom,l.email from livreur l where l.idLivreur = ?',[req.params.livreurid], function (error, results, fields) {
             if (error) {
@@ -125,15 +125,31 @@ module.exports = function(app){
         }); 
     });
 
-    //Routes articles
-    apiRoutes.get('/articles',function(req,res){});
+    //Renvoi la liste des articles (catalogue)
+    apiRoutes.get('/articles',function(req,res){
+        connection.query('SELECT idArticle, libelle, description, prixHT, taux, nom FROM Article, TVA, TypeArticle WHERE TVA.idTVA = Article.idTva and Article.idTypeArticle = TypeArticle.idTypeArticle', function (error, results, fields) {
+        if (error){
+            throw error;
+        }
+        return res.json(results);
+    });
+});
+     //Renvoi les infos pour un article passé en paramètre   
+    apiRoutes.get('/article/:idArticle',function(req,res){
+        if(!req.params.idArticle){
+            return res.status(400).json({success:false,message:'Article id necessaire'});
+        }
+        connection.query('SELECT idArticle, libelle, description, prixHT, taux, nom FROM Article, TVA, TypeArticle WHERE TVA.idTVA = Article.idTva and Article.idTypeArticle = TypeArticle.idTypeArticle and idArticle = ?',[req.params.idArticle],function(error, results, fileds){
+            if(error){
+                throw error;
+            }
+            return res.json(results);
+        })
+    })
 
     apiRoutes.post('/articles',urlencodedParser,function(req,res){})
 
-    //routes typeArticles
-    apiRoutes.get('/typeArticles',urlencodedParser,function(req,res){})
-
-    apiRoutes.post('/typeArticles',urlencodedParser,function(req,res){})
+    
 
    app.use(apiRoutes);
 }
