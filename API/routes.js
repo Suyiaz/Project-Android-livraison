@@ -87,6 +87,7 @@ module.exports = function(app){
         }); 
     });
 
+    //renvoi les infos d'un livreur donné en paramètre
     apiRoutes.get('/livreur/:livreurid',function(req,res){
         if(!req.params.livreurid){
             return res.status(400).json({success:false,message:'Livreur id necessaire'});
@@ -112,7 +113,7 @@ module.exports = function(app){
         }); 
     });
     
-     //Renvoi les infos d'un client en fonction du numéro de commande
+     //Renvoi le contenu d'une commande en fonction du numéro de commande
     apiRoutes.get('/article/commande/:idCommande',function(req,res){
         if(!req.params.idCommande){
             return res.status(400).json({success:false,message:'Client id necessaire'});
