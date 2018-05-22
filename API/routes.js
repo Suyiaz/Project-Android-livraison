@@ -31,17 +31,16 @@ module.exports = function(app){
         res.json({message:"Bienvenue sur l'API test",methode:req.method});
     });
 
-
-    apiRoutes.post('/client',urlencodedParser,function(req,res){        
-        var pNom = req.body.nom;
-        var pPrenom = req.body.prenom;
-        console.log(req.body);
-        /*connection.query('INSERT INTO client SET nom = ?, prenom = ?',[pNom,pPrenom], function (error, results, fields) {
-            if (error) {
+    //ajout d'un compte client
+    apiRoutes.post('/client',urlencodedParser,function(req,res){  
+        var postData = req.body;
+        console.log(req.body)
+        connection.query('INSERT INTO client SET ?',postData,function(error,results,fields){
+            if (error){
                 throw error;
             }
-            return res.status(200).json({success:true,message:'Client ajouté'});
-        });*/
+            return res.status(200).json({success:true,message:'Client stocké'})
+        })
     });
 
 
