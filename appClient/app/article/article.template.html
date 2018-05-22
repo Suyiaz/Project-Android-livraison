@@ -1,0 +1,31 @@
+<!-- Introduction panier de commande -->
+<div class="ec_container ec_title">
+    <h1>Catalogue</h1>
+</div>
+
+<div class="ec_container" ng-controller="ArticleListCtrl">
+
+    <div class="ec_subcontainer ec_subcontainer_catalog" ng-show="articles !== null">
+        <div class="product_card product_card_{{article.idArticle}}" ng-repeat="article in articles">
+            <a href="#!/article/1" class="product_photo">
+                <img src="../img/pizz3.jpg" height="130" />
+            </a>
+            <div class="product_details">
+                <span class="title">
+                    <a href="#!/article/{{article.idArticle}}">{{article.libelle}}</a>
+                </span>
+                <p class="product_description">{{article.description}}</p>
+                <div class="product_others">    
+                    <button class="error" ng-click="addArticleInBasket(article)">Ajouter au panier</button>
+                    <p class="product_price">
+                        <span class="price_value">{{article.prixHTFloat}}</span>
+                        <span class="currency">€</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--div class="ec_container ec_container_catalog" ng-controller="ArticleDetailsCtrl" ng-show="article !== null"></div-->

@@ -2,54 +2,58 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-    <head>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>My AngularJS App</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="app.css">
-        <link rel="stylesheet" href="css/navbar.css">
+<!--[if gt IE 8]><!--> <html lang="fr" ng-app="myApp" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-Command</title>
+    <!--link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script-->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="navbar/navbar.style.css">
+    <link rel="stylesheet" href="footer/footer.style.css">
+    <link rel="stylesheet" href="app.css">
+    <!-- Scripts -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-css/angular-css.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="app.js"></script>
+    <script src="article/article.module.js"></script>
+    <script src="panier/panier.module.js"></script>
+    <script src="livraison/livraison.module.js"></script>
+    <script src="confirmation-commande/confirmation-commande.module.js"></script>
+    <script src="services/api.module.mock.js"></script>
+    <script src="services/api.service.mock.js"></script>
+    <script src="navbar/navbar.component.js"></script>
+    <script src="footer/footer.component.js"></script>
+    <script src="article/article.component.js"></script>
+    <script src="panier/panier.component.js"></script>
+    <script src="livraison/livraison.component.js"></script>
+    <script src="confirmation-commande/confirmation-commande.component.js"></script>
+  </head>
+  <body>
 
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header>
+      <!-- Barre de navigation -->
+      <ec-navbar id="navbar" ng-controller="navbarCtrl"></ec-navbar>
+    </header>
 
+    <div ng-view id="ec_body"></div>
 
+    <!-- Pied de page -->
+    <ec-footer></ec-footer>
 
-
-    </head>
-    <body ng-app="myApp">
-        <header>
-            <nav id="navbar">
-                <div id="ec_logo">
-                        <span class="titre">E-Command</span>
-                        <span class="slogan">Le Pizzatologue</span>
-                </div>
-                <ul>
-                    <li><a href="#login">Se connecter</a></li>
-                    <li><a href="#inscription">S'inscrire</a></li>
-                    <li><a href="#">Besoin d'aide ?</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <div ng-view></div>
-        <!-- In production use:
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-        -->
-        <script src="js/angular.js"></script>
-        <script src="js/angular-route.js"></script>
-        <script src="app.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.js"></script>
-        <script src="components/inscriptionCtrl.js"></script>
-        <script src="services/APIService.js"></script>
-
-
-
-    </body>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
+  </body>
 </html>
