@@ -9,15 +9,16 @@ module.exports = function(app){
     var connection = mysql.createConnection({
         connectionLimit: 50,
         host: 'localhost',
+        port: '8889',
         user: 'root',
-        password: '',
-        database: 'pizzatologue'
+        password: 'root',
+        database: 'PizzatologueV1'
     });
 
     //connect to mysql
     connection.connect(function(error){
-        if(!!error){
-            console.log('Error');
+        if(error){
+            throw error;
         }
         else {
             console.log('Connected');
