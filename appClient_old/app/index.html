@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.style.css -->
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/main.style.css">
+    <link rel="stylesheet" href="styles/navbar.style.css">
+    <link rel="stylesheet" href="styles/home.style.css">
+    <link rel="stylesheet" href="styles/article.style.css">
+    <link rel="stylesheet" href="styles/basket.style.css">
+    <link rel="stylesheet" href="styles/shipping.style.css">
+    <link rel="stylesheet" href="styles/command-confirmation.style.css">
+    <link rel="stylesheet" href="styles/footer.style.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="ecApp" ng-controller="navbarCtrl">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <header>
+      <!-- Barre de navigation -->
+      <ec-navbar id="navbar"></ec-navbar>
+    </header>
+
+    <div ng-view id="ec_body"></div>
+
+    <!-- Pied de page -->
+    <ec-footer></ec-footer>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-css/angular-css.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+
+        <!-- Services -->
+        <script src="scripts/services/article.service.js"></script>
+        <script src="scripts/services/basket.service.js"></script>
+        <script src="scripts/services/shipping.service.js"></script>
+        
+        <!-- Directives -->
+        <script src="scripts/directives/navbar.directive.js"></script>
+        <script src="scripts/directives/footer.directive.js"></script>
+        
+        <!-- Contrôleurs -->
+        <script src="scripts/controllers/home.controller.js"></script>
+        <script src="scripts/controllers/article.controller.js"></script>
+        <script src="scripts/controllers/basket.controller.js"></script>
+        <script src="scripts/controllers/shipping.controller.js"></script>
+        <script src="scripts/controllers/command-confirmation.controller.js"></script>
+        
+        <!-- endbuild -->
+</body>
+</html>
