@@ -28,6 +28,11 @@ app.config(function ($routeProvider) {
             .when("/panier", {
                 templateUrl: "views/panier.html",
                 css: "css/panier.css"
+            })
+            .when("/validation", {
+                template: '<validation></validation>',
+                css: "css/validation.css",
             });
+            
 
 });
